@@ -9,4 +9,21 @@ function index(req, res) {
   })
 }
 
-export { index }
+function addVillager(req, res) {
+  console.log(req.body)
+}
+
+function show(req, res) {
+  Profile.findById(req.params.id)
+  .then(profile => res.json(profile))
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
+export { 
+  index,
+  addVillager,
+  show
+}
