@@ -13,6 +13,8 @@ const villagerSchema = new mongoose.Schema({
   bubble_color: String,
   text_color: String,
   saying: String
+}, {
+  timestamps: true
 })
 
 const profileSchema = new mongoose.Schema({

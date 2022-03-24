@@ -10,10 +10,28 @@ function index(req, res) {
 }
 
 function addVillager(req, res) {
-  console.log(req.body)
+  req.body.name = req.body.name['name-USen']
+  req.body.birthday_string = req.body['birthday-string']
+  req.body.catch_phrase = req.body['catch-phrase']
+  req.body.bubble_color = req.body['bubble-color']
+  req.body.text_color = req.body['text-color']
+  Profile.findById(req.user.profile)
+  .then(profile => {
+    profile.villagers.push(req.body)
+    profile.save()
+    .then(updatedProfile => {
+      res.json(updatedProfile)
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+  // respond with updated profile
 }
 
 function show(req, res) {
+  console.log(req.params.id)
   Profile.findById(req.params.id)
   .then(profile => res.json(profile))
   .catch(err => {
