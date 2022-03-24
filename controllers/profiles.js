@@ -40,8 +40,26 @@ function show(req, res) {
   })
 }
 
+function removeVillager(req, res) {
+  console.log(req.params.villagerName)
+  Profile.findById(req.user.profile)
+  .then(profile => {
+    const idx = profile.villagers.findIndex(villager => villager.name === req.params.villagerName)
+    profile.villagers[idx].remove()
+    profile.save()
+    .then(savedProfile => {
+      res.json(savedProfile)
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
 export { 
   index,
   addVillager,
-  show
+  show,
+  removeVillager
 }

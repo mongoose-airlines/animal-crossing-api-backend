@@ -12,5 +12,6 @@ router.use(decodeUserFromToken)
 router.get('/', checkAuth, profilesCtrl.index)
 router.get('/:id', checkAuth, profilesCtrl.show)
 router.post('/addVillager', checkAuth, profilesCtrl.addVillager)
+router.patch('/:villagerName', checkAuth, profilesCtrl.removeVillager)
 
 export { router }
